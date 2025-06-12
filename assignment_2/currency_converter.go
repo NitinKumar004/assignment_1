@@ -6,6 +6,8 @@ import (
 	"time"
 )
 
+//currency converter
+
 func validator(code string) bool {
 	code = strings.ToUpper(code)
 	return code == "USD" || code == "INR" || code == "EUR"
