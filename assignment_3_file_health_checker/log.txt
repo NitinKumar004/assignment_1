@@ -1,0 +1,10 @@
+[INFO] Server started
+[ERROR] Failed to connect to database
+[WARNING] High memory usage detected
+[INFO] User registered successfully
+[INFO] Background job completed
+[ERROR] Timeout while connecting to service
+[WARNING] Disk space below threshold
+[INFO] Scheduled task started
+[ERROR] Unable to read configuration file
+[INFO] User login successful
