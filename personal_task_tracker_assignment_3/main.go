@@ -12,10 +12,6 @@ type task struct {
 	createdat string
 }
 
-type taskTracker struct {
-	tasks []task
-}
-
 // unique id generator with closure function to remember defined data at own their places
 func idGenerator() func() int {
 	id := 0
@@ -40,16 +36,17 @@ func greet(name string) {
 }
 
 // here is addtask function help us prevent to add duplicate task and add new task
-func (t *taskTracker) addTask(description string, status string, getNextID func() int) {
+func addTask(taskdata *[]task, description string, status string, getNextID func() int) {
 	//checking duplicate if found we have to prevent in it
-	//for i := range t {
-	//	if t[i].taskname == description && t[i].status == status {
-	//		fmt.Println("Task  have  been  already is in your list  you are trying to adding duplicate task : ", t.taskname)
-	//		return
-	//	}
-	//}
+	for _, t := range *taskdata {
+		if t.taskname == description && t.status == status {
+			fmt.Println("Task  have  been  already is in your list  you are trying to adding duplicate task : ", t.taskname)
+			return
+
+		}
+	}
 	// if duplicate  not found we use  pointer to changes data directly in memory
-	t.tasks = append(t.tasks, task{
+	*taskdata = append(*taskdata, task{
 		taskid:   getNextID(),
 		taskname: description,
 		status:   status,
@@ -61,22 +58,21 @@ func (t *taskTracker) addTask(description string, status string, getNextID func(
 }
 
 // marking task as completed with their given task id
-func (t *taskTracker) markingComplete(taskid int) {
-	for i, tsk := range t.tasks {
-		if tsk.taskid == taskid {
-			t.tasks[i].status = "Completed"
-			fmt.Println("task id :", tsk.taskid, "has been Completed")
+func markingComplete(taskdata *[]task, taskid int) {
+	for i, t := range *taskdata {
+		if t.taskid == taskid {
+			(*taskdata)[i].status = "Completed"
+			fmt.Println("task id :", t.taskid, "has been Completed")
 			return
 		}
 
 	}
-
 	fmt.Println("there is no task with id ", taskid)
 }
 
 // whatever we have task we are listing that task here
-func Listalltask(taskdata []task) {
-	for _, t := range taskdata {
+func Listalltask(taskdata *[]task) {
+	for _, t := range *taskdata {
 		fmt.Println("Task id: ", t.taskid, " Description : ", t.taskname, " Status : ", t.status, " created at : ", t.createdat)
 
 	}
@@ -86,7 +82,6 @@ func Listalltask(taskdata []task) {
 func Pendingtask(taskdata []task) {
 	fmt.Println("Pending task Details : ")
 	for _, t := range taskdata {
-
 		if t.status == "Pending" {
 			fmt.Println("Task id: ", t.taskid, " Description : ", t.taskname, " Status : ", t.status)
 		}
@@ -95,32 +90,29 @@ func Pendingtask(taskdata []task) {
 func main() {
 	greet(" Sir/madam")
 
-	tt := taskTracker{tasks: make([]task, 0)}
+	taskdata := []task{}
 	//assigning clousre here in main function to remember data where it defined
 	getNextID := idGenerator()
-	tt.addTask("Buy groceries", "Pending", getNextID)
-	tt.addTask("Go Gym", "Pending", getNextID)
-	tt.addTask("Buy groceries", "Pending", getNextID)
+	addTask(&taskdata, "Buy groceries", "Pending", getNextID)
+	addTask(&taskdata, "Go Gym", "Pending", getNextID)
+	addTask(&taskdata, "Buy groceries", "Pending", getNextID)
 
-	Listalltask(tt.tasks)
-	tt.markingComplete(1)
-	Pendingtask(tt.tasks)
+	Listalltask(&taskdata)
+	markingComplete(&taskdata, 1)
+	Pendingtask(taskdata)
 
 	var process int
 	fmt.Println("Do you want to add a task if yes : press 1 otherwise press 0 Thanks :")
 	fmt.Scan(&process)
 
-	for process == 1 {
+	if process == 1 {
 		var taskname string
 		fmt.Println("Enter your task name: ")
 		fmt.Scan(&taskname)
 		if taskname != "" {
-			tt.addTask(taskname, "Pending", getNextID)
-			Pendingtask(tt.tasks)
-		}
+			addTask(&taskdata, taskname, "Pending", getNextID)
 
-		fmt.Println("want to add more?")
-		fmt.Scan(&process)
+		}
 	}
 
 }
