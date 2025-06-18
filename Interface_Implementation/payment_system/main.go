@@ -8,7 +8,7 @@ type PaymentMethod interface {
 	Pay(amount float64) string
 }
 
-//extra interface to otp sending
+// extra interface to otp sending
 type Generateotp interface {
 	Generateotp()
 }
@@ -22,7 +22,7 @@ type UPI struct {
 	upiid string
 }
 
-//only add otp system to pay by credit card
+// only add otp system to pay by credit card
 func (c CreditCard) Generateotp() {
 	fmt.Println("[CreditCard] OTP sent to registered number")
 }
