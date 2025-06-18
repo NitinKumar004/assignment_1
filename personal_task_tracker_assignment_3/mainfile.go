@@ -92,6 +92,25 @@ func Pendingtask(taskdata []task) {
 		}
 	}
 }
+
+func (t *taskTracker) test() (int, int) {
+	//x := len(t.tasks)
+	countpending := 0
+	countcompleted := 0
+
+	for _, task := range t.tasks {
+		switch task.status {
+		case "Pending":
+			countpending++
+		case "Completed":
+			countcompleted++
+		}
+
+	}
+	//	fmt.Println(countpending, countcompleted)
+	return countpending, countcompleted
+
+}
 func main() {
 	greet(" Sir/madam")
 
@@ -122,5 +141,7 @@ func main() {
 		fmt.Println("want to add more?")
 		fmt.Scan(&process)
 	}
+	x, y := tt.test()
+	fmt.Println("x and y is ", x, y)
 
 }
