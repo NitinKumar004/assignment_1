@@ -62,6 +62,7 @@ func (t *taskTracker) addTask(description string, status string, getNextID func(
 
 // marking task as completed with their given task id
 func (t *taskTracker) markingComplete(taskid int) {
+	fmt.Println("Marking task : ", taskid)
 	for i, tsk := range t.tasks {
 		if tsk.taskid == taskid {
 			t.tasks[i].status = "Completed"
@@ -92,6 +93,7 @@ func Pendingtask(taskdata []task) {
 		}
 	}
 }
+
 func main() {
 	greet(" Sir/madam")
 
@@ -122,5 +124,4 @@ func main() {
 		fmt.Println("want to add more?")
 		fmt.Scan(&process)
 	}
-
 }
