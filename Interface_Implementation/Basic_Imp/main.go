@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"math"
 )
 
@@ -39,14 +38,12 @@ func costt(s Shape) float64 {
 	}
 }
 
-func main() {
-	// Circle
-	c := &Circle{radius: 5}
-	fmt.Println("Circle cost:", costt(c))
-
-	r := &Rectangle{width: 10, height: 5}
-	fmt.Println("Rectangle cost:", costt(r))
-
-	fmt.Println("Circle Area is", c.Area())
-	fmt.Println("Rectangle Area is", r.Area())
-}
+//func main() {
+//	// Circle
+//	//c := &Circle{radius: 5}
+//	//fmt.Println("Circle cost:", costt(c))
+//	//
+//	//r := &Rectangle{width: 10, height: 5}
+//	//fmt.Println("Rectangle cost:", costt(r))
+//
+//}
