@@ -95,6 +95,7 @@ func (d *data) alltask(w http.ResponseWriter, _ *http.Request) {
 func (d *data) gettask(w http.ResponseWriter, r *http.Request) {
 	idStr := r.PathValue("id")
 	id, err := strconv.Atoi(idStr)
+
 	if err != nil {
 		http.Error(w, "invalid id", http.StatusBadRequest)
 		return
@@ -109,6 +110,7 @@ func (d *data) gettask(w http.ResponseWriter, r *http.Request) {
 
 		response := map[string]string{"message": "data fetched successfullyyyy"}
 		jsonresponse, err := json.Marshal(response)
+
 		if err != nil {
 			http.Error(w, "invalid data", http.StatusBadRequest)
 			return
@@ -128,6 +130,7 @@ func (d *data) gettask(w http.ResponseWriter, r *http.Request) {
 func (d *data) completetask(w http.ResponseWriter, r *http.Request) {
 	idStr := r.PathValue("id")
 	id, err := strconv.Atoi(idStr)
+
 	if err != nil {
 		http.Error(w, "invalid id", http.StatusBadRequest)
 		return
@@ -145,6 +148,7 @@ func (d *data) completetask(w http.ResponseWriter, r *http.Request) {
 
 		var jsonresponse []byte
 		jsonresponse, err = json.Marshal(response)
+
 		if err != nil {
 			http.Error(w, "invalid data", http.StatusBadRequest)
 			return
@@ -153,6 +157,7 @@ func (d *data) completetask(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 		_, err = w.Write(jsonresponse)
+
 		if err != nil {
 			http.Error(w, "error to sending response", http.StatusInternalServerError)
 			return
@@ -163,6 +168,7 @@ func (d *data) completetask(w http.ResponseWriter, r *http.Request) {
 
 	response := map[string]string{"message": "task not found"}
 	jsonresponse, err := json.Marshal(response)
+
 	if err != nil {
 		http.Error(w, "invalid data", http.StatusBadRequest)
 		return
@@ -178,6 +184,7 @@ func (d *data) completetask(w http.ResponseWriter, r *http.Request) {
 func (d *data) deletetask(w http.ResponseWriter, r *http.Request) {
 	idStr := r.PathValue("id")
 	id, err := strconv.Atoi(idStr)
+
 	if err != nil {
 		http.Error(w, "invalid id", http.StatusBadRequest)
 		return
@@ -210,6 +217,7 @@ func (d *data) deletetask(w http.ResponseWriter, r *http.Request) {
 
 	response := map[string]string{"message": "task not found"}
 	jsonresponse, err := json.Marshal(response)
+
 	if err != nil {
 		http.Error(w, "invalid data", http.StatusBadRequest)
 		return
