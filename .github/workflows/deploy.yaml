@@ -29,5 +29,7 @@ jobs:
         run: |
           CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o main
 
-      - name: Check Linters
-        run : $(go env GOPATH)/bin/golangci-lint run
+      - name: Check Linters for run
+        uses: golangci/golangci-lint-action@v7
+        with:
+          version: v2.1.6
