@@ -32,4 +32,4 @@ jobs:
       - name: Check Linters for run
         uses: golangci/golangci-lint-action@v7
         with:
-          version: v2.1.6
+          version: v1.56.2
