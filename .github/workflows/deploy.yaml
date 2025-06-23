@@ -9,6 +9,9 @@ jobs:
   build:
     name: nitin
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: assignment_4_task_http/hello
 
     steps:
       - name: Checkout code
