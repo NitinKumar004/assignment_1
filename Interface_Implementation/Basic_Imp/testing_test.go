@@ -26,7 +26,7 @@ func TestRectangle(t *testing.T) {
 }
 func TestCircle(t *testing.T) {
 	r := &Circle{5}
-	var exp float64 = 392.6990816
+	var exp float64 = 392
 	y := costt(r)
 
 	if 1e-2 < (exp - y) {

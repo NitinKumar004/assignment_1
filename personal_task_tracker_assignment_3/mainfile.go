@@ -6,10 +6,9 @@ import (
 )
 
 type task struct {
-	taskid    int
-	taskname  string
-	status    string
-	createdat string
+	taskid   int    `json:"taskid"`
+	taskname string `json:"taskname"`
+	status   string `json:"status"`
 }
 
 type taskTracker struct {
